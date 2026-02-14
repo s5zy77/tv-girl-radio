@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Girl Radio</title>
+    <link rel="stylesheet" href="stvgirlstyle.css">
+</head>
+<body>
+    <div id="cursor"></div>
+
+    <div class="container">
+        <h1 class="title">TV Girl Radio</h1>
+        
+        <div class="grid-container" id="grid"></div>
+
+        <div class="controls">
+            <div id="status">Select a letter to tune in...</div>
+            <div id="spotify-wrapper"></div>
+            <p class="credits">Music via Spotify • TV Girl & Friends</p>
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const wrapper = document.getElementById('spotify-wrapper');
+        const status = document.getElementById('status');
+        const cursor = document.getElementById('cursor');
+
+        // Full Links with ?utm_source=generator included
+        const songLinks = {
+    'A': 'https://open.spotify.com/embed/track/3hEfpBHxgieRLz4t3kLNEg?utm_source=generatorr', // About You
+    'B': 'https://open.spotify.com/embed/track/39sDitIeCMrVX2QyXHY46t?utm_source=generator', // Blue Hair
+    'C': 'https://open.spotify.com/embed/track/5rurggqwwudn9clMdcchxT?utm_source=generator', // Calling
+    'D': 'https://open.spotify.com/embed/track/0QzuaeCEEOV40Pn7IvKEny?utm_source=generator', // Double Take
+    'E': 'https://open.spotify.com/embed/track/7KboPR4TuGQSAEjJNXKwQQ?utm_source=generator', // Echoes of Yesterday
+    'F': 'https://open.spotify.com/embed/track/2GBgiuXwY1KzJMA0gSAr9J?utm_source=generator', // For You
+    'G': 'https://open.spotify.com/embed/track/3aBGKDiAAvH2H7HLOyQ4US?utm_source=generator', // Grapes Upon the Vine
+    'H': 'https://open.spotify.com/embed/track/1JdQibdvxgcrB8Rv1KFndw?utm_source=generator', // Heaven is a Bedroom
+    'I': 'https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n?utm_source=generator', // If You Want It
+    'J': 'https://open.spotify.com/embed/track/6t7WriKgVszATnrdBKSUAf?utm_source=generator', // Jump the Turnstile
+    'K': 'https://open.spotify.com/embed/track/1FWsomP9StpCcXNWmJk8Cl?utm_source=generator', // King of Echo Park
+    'L': 'https://open.spotify.com/embed/track/5mtTAScDytxMMqZj14NmlN?utm_source=generator', // love (wave to earth)
+    'M': 'https://open.spotify.com/embed/track/6BPcUXYERAahpunmb0AovH?utm_source=generator', // Melanie
+    'N': 'https://open.spotify.com/embed/track/7nbAMKGkPMjc4EuNNsjXqZ?utm_source=generator', // Natalie Wood
+    'O': 'https://open.spotify.com/embed/track/2uIX8YMNjGMD7441kqyyNU?utm_source=generator', // On the Level (Mac DeMarco)
+    'P': 'https://open.spotify.com/embed/track/38kjFXYgPvtuXCPbHPMGte?utm_source=generator', // Pantyhose
+    'Q': 'https://open.spotify.com/embed/track/4TxfFD31VZKLgLQX67z0SX?utm_source=generator', // Queen of the Gas Station
+    'R': 'https://open.spotify.com/embed/track/2xql0pid3EUwW38AsywxhV?utm_source=generator', // Louise (TV Girl - R-slotted)
+    'S': 'https://open.spotify.com/embed/track/0kFFvTvmSgJeNkVKPFaplu?utm_source=generator', // Song About Me
+    'T': 'https://open.spotify.com/embed/track/0MJ5wKsPEeihONNfugHGy7?utm_source=generator', // The Blonde
+    'U': 'https://open.spotify.com/embed/track/1y3r6RXiJZNBV1EI0NggpS?utm_source=generator', // Upper West Side
+    'V': 'https://open.spotify.com/embed/track/2wXioTynVwrEWYRv6R6vEj?utm_source=generator', // Valerie
+    'W': 'https://open.spotify.com/embed/track/1XrSjpNe49IiygZfzb74pk?utm_source=generator', // What Once Was (Her's)
+    'X': 'https://open.spotify.com/embed/track/5pwcZWC7XdfoPo8FDwPaui?utm_source=generator', // X-Ray Eyes
+    'Y': 'https://open.spotify.com/embed/track/7zwn1eykZtZ5LODrf7c0tS?utm_source=generator', // You Asked For It
+    'Z': 'https://open.spotify.com/embed/track/3pJnX5b1lZYgM5rz4DMJNK?utm_source=generator'  // Zonked
+};
+
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+        alphabet.forEach(letter => {
+            const btn = document.createElement('div');
+            btn.className = 'song-btn';
+            btn.innerText = letter;
+
+            btn.onclick = () => {
+                if(songLinks[letter]) {
+                    wrapper.innerHTML = `
+                        <iframe style="border-radius:12px" 
+                            src="${songLinks[letter]}" 
+                            width="100%" 
+                            height="80" 
+                            frameBorder="0" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>`;
+                    status.innerText = `Tuned into: ${letter}`;
+                }
+                
+                btn.style.transform = "scale(0.9) rotate(-10deg)";
+                setTimeout(() => btn.style.transform = "", 150);
+            };
+            grid.appendChild(btn);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>

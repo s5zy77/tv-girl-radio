@@ -1,0 +1,143 @@
+/* 1. SETUP & FONTS */
+@font-face {
+    font-family: 'TVGirlFont';
+    src: url('font1.ttf') format('truetype'); /* Ensure this filename matches your file! */
+}
+
+:root {
+    --pink: #ff99cc;
+    --blue: #87ceeb;
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.2);
+}
+
+/* 2. BODY & BACKGROUND */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    background: url('background.jpg') center/cover fixed no-repeat;
+    font-family: 'TVGirlFont', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    cursor: none; /* Custom cursor only */
+}
+
+/* 3. CUSTOM CURSOR */
+#cursor {
+    width: 20px;
+    height: 20px;
+    background: var(--pink);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    box-shadow: 0 0 15px var(--pink);
+}
+
+/* 4. MAIN LAYOUT */
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    z-index: 10;
+}
+
+.title {
+    color: var(--white);
+    font-size: 3rem;
+    text-shadow: 3px 3px 0px var(--pink);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* 5. THE GRID */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 12px;
+    padding: 20px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 3px solid var(--white);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.song-btn {
+    aspect-ratio: 1/1;
+    background: url('button-image.png') center/cover;
+    background-color: var(--pink); /* Fallback color */
+    border: 2px solid var(--white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.song-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--blue);
+    box-shadow: 0 0 15px var(--blue);
+}
+
+/* 6. SPOTIFY PLAYER SECTION */
+.controls {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#status {
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    border: 1px solid var(--glass);
+}
+
+#spotify-wrapper {
+    width: 100%;
+    max-width: 350px;
+    height: 80px; /* Essential for the compact player */
+    background: var(--glass);
+    border-radius: 12px;
+    border: 2px solid var(--white);
+    overflow: hidden;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 7. FOOTER & ANIMATIONS */
+.credits {
+    margin-top: 15px;
+    font-size: 0.7rem;
+    color: var(--white);
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 450px) {
+    .title { font-size: 2rem; }
+    .grid-container { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .song-btn { font-size: 1.2rem; }
+}
